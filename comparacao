@@ -1,0 +1,43 @@
+def main(){
+
+	int a = 0;
+	char b = 'b';
+	
+	if (a == 0){
+		a = 4;
+	}else if ( a>3 || a<0){
+		a = 3;
+	}else{
+		a = 6;
+	}	
+	int i ;
+	while(i < 10){
+	
+		printf(b);
+		i++;
+	}
+}
+
+----------------------------------------------------------------------------------------
+
+funcao main(){
+	int a = 0;
+	palavra b = "b";
+	
+	se (a igual_a 0){
+		a = 4;
+	} se_nao se(a maior_que 3 ou a menor_que 0){
+		a = 3;
+	}se_nao{
+		a = 6;
+	}
+	int i = 0;
+	enquanto(i menor_que 10){
+		i = i + 1;
+		escreve(b);
+	}
+	
+}
+	
+	
+	
