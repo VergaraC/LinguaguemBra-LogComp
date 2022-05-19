@@ -16,11 +16,9 @@
 
 program : block 
         ;
-
 block : OPEN_BRACKET statement CLOSE_BRACKET
       | OPEN_BRACKET CLOSE_BRACKET
       ;
-        
 statement : assigment
           | block
           | print
@@ -28,26 +26,22 @@ statement : assigment
           | while
           | var_type
           SEMI_COLON
-          ;
-        
+          ;    
 relexpression: expression EQUAL_TO
              | expression MINOR
              | expression GREATER
              | expression
              ;
-
 expression: term PLUS
           | term MINUS
           | term OR
           | term
           ;
-
 term: factor
     | factor MULT
     | factor DIV
     | factor AND
     ;
-
 factor: INT
     | STR
     | IDEN
