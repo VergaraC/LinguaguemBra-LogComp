@@ -2,6 +2,12 @@
 
 Por Victor Vergara
 
+flex -l tokens.l
+
+bison -dv parser.y
+
+gcc -o pyrthon parser.tab.c lex.yy.c -lfl
+
 ## EBNF da Linguagem 
 
 
@@ -15,14 +21,14 @@ DECLARATOR = ( "int" | "palavra" ) , IDENTIFIER , { "," , IDENTIFIER } ;
 BLOCK = "{" , { STATEMENT }, "}" ;
 STATEMENT = ( λ | ASSIGNMENT | PRINT | BLOCK | WHILE | IF | DECLARATOR), ";" ;
 FACTOR = INT | STRING | IDENTIFIER | FUNCTIONCALL | (("+" | "-" | "inverte") , FACTOR) | "(" , RELEXPRESSION , ")" | SCANF;
-TERM = FACTOR, { ("*" | "/" | "e"), FACTOR } ;
-EXPRESSION = TERM, { ("+" | "-" | "ou" ), TERM } ;
+TERM = FACTOR, { ("*" | "/" | "eee"), FACTOR } ;
+EXPRESSION = TERM, { ("+" | "-" | "ouu" ), TERM } ;
 RELEXPRESSION = EXPRESSION , {("menor_que" | "maior_que" | "igual") , EXPRESSION } ;
 WHILE = "enquanto", "(", RELEXPRESSION ,")", STATEMENT;
-IF = "se", "(", RELEXPRESSION ,")", STATEMENT, (("se_nao", STATEMENT) | λ );
+IF = "see", "(", RELEXPRESSION ,")", STATEMENT, (("se_nao", STATEMENT) | λ );
 ASSIGNMENT = IDENTIFIER, "=" , EXPRESSION ;
 PRINT = "escreve", "(" , EXPRESSION, ")" ;
-SCANF = "le", "(", ")" ;
+SCANF = "lee", "(", ")" ;
 IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
 INT = DIGIT , { DIGIT } ;
 LETTER = ( a | ... | z | A | ... | Z ) ;

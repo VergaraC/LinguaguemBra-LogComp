@@ -1,0 +1,766 @@
+Terminals unused in grammar
+
+    RETURN
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: block
+
+    2 block: OPEN_BRACKET statement CLOSE_BRACKET
+    3      | OPEN_BRACKET CLOSE_BRACKET
+
+    4 statement: assigment
+    5          | block
+    6          | print
+    7          | if
+    8          | while
+    9          | var_type SEMI_COLON
+
+   10 relexpression: expression EQUAL_TO
+   11              | expression MINOR
+   12              | expression GREATER
+   13              | expression
+
+   14 expression: term PLUS
+   15           | term MINUS
+   16           | term OR
+   17           | term
+
+   18 term: factor
+   19     | factor MULT
+   20     | factor DIV
+   21     | factor AND
+
+   22 factor: INT
+   23       | STR
+   24       | IDEN
+   25       | PLUS factor
+   26       | MINUS factor
+   27       | NOT factor
+   28       | SCANF OPEN_PAR CLOSE_PAR
+   29       | OPEN_PAR relexpression CLOSE_PAR
+
+   30 assigment: var_type IDEN EQUAL relexpression
+
+   31 print: PRINT OPEN_PAR relexpression CLOSE_PAR
+
+   32 if: IF OPEN_PAR relexpression CLOSE_PAR statement else
+
+   33 while: WHILE OPEN_PAR relexpression CLOSE_PAR statement
+
+   34 else: ELSE statement
+
+   35 var_type: VAR_TYPE IDEN
+   36         | COMA IDEN
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    IDEN (258) 24 30 35 36
+    INT (259) 22
+    STR (260) 23
+    EQUAL (261) 30
+    EQUAL_TO (262) 10
+    MINOR (263) 11
+    GREATER (264) 12
+    NOT (265) 27
+    AND (266) 21
+    OR (267) 16
+    OPEN_PAR (268) 28 29 31 32 33
+    CLOSE_PAR (269) 28 29 31 32 33
+    OPEN_BRACKET (270) 2 3
+    CLOSE_BRACKET (271) 2 3
+    SEMI_COLON (272) 9
+    PRINT (273) 31
+    SCANF (274) 28
+    WHILE (275) 33
+    IF (276) 32
+    ELSE (277) 34
+    VAR_TYPE (278) 35
+    RETURN (279)
+    COMA (280) 36
+    PLUS (281) 14 25
+    MINUS (282) 15 26
+    MULT (283) 19
+    DIV (284) 20
+
+
+Nonterminals, with rules where they appear
+
+    $accept (30)
+        on left: 0
+    program (31)
+        on left: 1
+        on right: 0
+    block (32)
+        on left: 2 3
+        on right: 1 5
+    statement (33)
+        on left: 4 5 6 7 8 9
+        on right: 2 32 33 34
+    relexpression (34)
+        on left: 10 11 12 13
+        on right: 29 30 31 32 33
+    expression (35)
+        on left: 14 15 16 17
+        on right: 10 11 12 13
+    term (36)
+        on left: 18 19 20 21
+        on right: 14 15 16 17
+    factor (37)
+        on left: 22 23 24 25 26 27 28 29
+        on right: 18 19 20 21 25 26 27
+    assigment (38)
+        on left: 30
+        on right: 4
+    print (39)
+        on left: 31
+        on right: 6
+    if (40)
+        on left: 32
+        on right: 7
+    while (41)
+        on left: 33
+        on right: 8
+    else (42)
+        on left: 34
+        on right: 32
+    var_type (43)
+        on left: 35 36
+        on right: 9 30
+
+
+State 0
+
+    0 $accept: • program $end
+
+    OPEN_BRACKET  shift, and go to state 1
+
+    program  go to state 2
+    block    go to state 3
+
+
+State 1
+
+    2 block: OPEN_BRACKET • statement CLOSE_BRACKET
+    3      | OPEN_BRACKET • CLOSE_BRACKET
+
+    OPEN_BRACKET   shift, and go to state 1
+    CLOSE_BRACKET  shift, and go to state 4
+    PRINT          shift, and go to state 5
+    WHILE          shift, and go to state 6
+    IF             shift, and go to state 7
+    VAR_TYPE       shift, and go to state 8
+    COMA           shift, and go to state 9
+
+    block      go to state 10
+    statement  go to state 11
+    assigment  go to state 12
+    print      go to state 13
+    if         go to state 14
+    while      go to state 15
+    var_type   go to state 16
+
+
+State 2
+
+    0 $accept: program • $end
+
+    $end  shift, and go to state 17
+
+
+State 3
+
+    1 program: block •
+
+    $default  reduce using rule 1 (program)
+
+
+State 4
+
+    3 block: OPEN_BRACKET CLOSE_BRACKET •
+
+    $default  reduce using rule 3 (block)
+
+
+State 5
+
+   31 print: PRINT • OPEN_PAR relexpression CLOSE_PAR
+
+    OPEN_PAR  shift, and go to state 18
+
+
+State 6
+
+   33 while: WHILE • OPEN_PAR relexpression CLOSE_PAR statement
+
+    OPEN_PAR  shift, and go to state 19
+
+
+State 7
+
+   32 if: IF • OPEN_PAR relexpression CLOSE_PAR statement else
+
+    OPEN_PAR  shift, and go to state 20
+
+
+State 8
+
+   35 var_type: VAR_TYPE • IDEN
+
+    IDEN  shift, and go to state 21
+
+
+State 9
+
+   36 var_type: COMA • IDEN
+
+    IDEN  shift, and go to state 22
+
+
+State 10
+
+    5 statement: block •
+
+    $default  reduce using rule 5 (statement)
+
+
+State 11
+
+    2 block: OPEN_BRACKET statement • CLOSE_BRACKET
+
+    CLOSE_BRACKET  shift, and go to state 23
+
+
+State 12
+
+    4 statement: assigment •
+
+    $default  reduce using rule 4 (statement)
+
+
+State 13
+
+    6 statement: print •
+
+    $default  reduce using rule 6 (statement)
+
+
+State 14
+
+    7 statement: if •
+
+    $default  reduce using rule 7 (statement)
+
+
+State 15
+
+    8 statement: while •
+
+    $default  reduce using rule 8 (statement)
+
+
+State 16
+
+    9 statement: var_type • SEMI_COLON
+   30 assigment: var_type • IDEN EQUAL relexpression
+
+    IDEN        shift, and go to state 24
+    SEMI_COLON  shift, and go to state 25
+
+
+State 17
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 18
+
+   31 print: PRINT OPEN_PAR • relexpression CLOSE_PAR
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    relexpression  go to state 34
+    expression     go to state 35
+    term           go to state 36
+    factor         go to state 37
+
+
+State 19
+
+   33 while: WHILE OPEN_PAR • relexpression CLOSE_PAR statement
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    relexpression  go to state 38
+    expression     go to state 35
+    term           go to state 36
+    factor         go to state 37
+
+
+State 20
+
+   32 if: IF OPEN_PAR • relexpression CLOSE_PAR statement else
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    relexpression  go to state 39
+    expression     go to state 35
+    term           go to state 36
+    factor         go to state 37
+
+
+State 21
+
+   35 var_type: VAR_TYPE IDEN •
+
+    $default  reduce using rule 35 (var_type)
+
+
+State 22
+
+   36 var_type: COMA IDEN •
+
+    $default  reduce using rule 36 (var_type)
+
+
+State 23
+
+    2 block: OPEN_BRACKET statement CLOSE_BRACKET •
+
+    $default  reduce using rule 2 (block)
+
+
+State 24
+
+   30 assigment: var_type IDEN • EQUAL relexpression
+
+    EQUAL  shift, and go to state 40
+
+
+State 25
+
+    9 statement: var_type SEMI_COLON •
+
+    $default  reduce using rule 9 (statement)
+
+
+State 26
+
+   24 factor: IDEN •
+
+    $default  reduce using rule 24 (factor)
+
+
+State 27
+
+   22 factor: INT •
+
+    $default  reduce using rule 22 (factor)
+
+
+State 28
+
+   23 factor: STR •
+
+    $default  reduce using rule 23 (factor)
+
+
+State 29
+
+   27 factor: NOT • factor
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    factor  go to state 41
+
+
+State 30
+
+   29 factor: OPEN_PAR • relexpression CLOSE_PAR
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    relexpression  go to state 42
+    expression     go to state 35
+    term           go to state 36
+    factor         go to state 37
+
+
+State 31
+
+   28 factor: SCANF • OPEN_PAR CLOSE_PAR
+
+    OPEN_PAR  shift, and go to state 43
+
+
+State 32
+
+   25 factor: PLUS • factor
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    factor  go to state 44
+
+
+State 33
+
+   26 factor: MINUS • factor
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    factor  go to state 45
+
+
+State 34
+
+   31 print: PRINT OPEN_PAR relexpression • CLOSE_PAR
+
+    CLOSE_PAR  shift, and go to state 46
+
+
+State 35
+
+   10 relexpression: expression • EQUAL_TO
+   11              | expression • MINOR
+   12              | expression • GREATER
+   13              | expression •
+
+    EQUAL_TO  shift, and go to state 47
+    MINOR     shift, and go to state 48
+    GREATER   shift, and go to state 49
+
+    $default  reduce using rule 13 (relexpression)
+
+
+State 36
+
+   14 expression: term • PLUS
+   15           | term • MINUS
+   16           | term • OR
+   17           | term •
+
+    OR     shift, and go to state 50
+    PLUS   shift, and go to state 51
+    MINUS  shift, and go to state 52
+
+    $default  reduce using rule 17 (expression)
+
+
+State 37
+
+   18 term: factor •
+   19     | factor • MULT
+   20     | factor • DIV
+   21     | factor • AND
+
+    AND   shift, and go to state 53
+    MULT  shift, and go to state 54
+    DIV   shift, and go to state 55
+
+    $default  reduce using rule 18 (term)
+
+
+State 38
+
+   33 while: WHILE OPEN_PAR relexpression • CLOSE_PAR statement
+
+    CLOSE_PAR  shift, and go to state 56
+
+
+State 39
+
+   32 if: IF OPEN_PAR relexpression • CLOSE_PAR statement else
+
+    CLOSE_PAR  shift, and go to state 57
+
+
+State 40
+
+   30 assigment: var_type IDEN EQUAL • relexpression
+
+    IDEN      shift, and go to state 26
+    INT       shift, and go to state 27
+    STR       shift, and go to state 28
+    NOT       shift, and go to state 29
+    OPEN_PAR  shift, and go to state 30
+    SCANF     shift, and go to state 31
+    PLUS      shift, and go to state 32
+    MINUS     shift, and go to state 33
+
+    relexpression  go to state 58
+    expression     go to state 35
+    term           go to state 36
+    factor         go to state 37
+
+
+State 41
+
+   27 factor: NOT factor •
+
+    $default  reduce using rule 27 (factor)
+
+
+State 42
+
+   29 factor: OPEN_PAR relexpression • CLOSE_PAR
+
+    CLOSE_PAR  shift, and go to state 59
+
+
+State 43
+
+   28 factor: SCANF OPEN_PAR • CLOSE_PAR
+
+    CLOSE_PAR  shift, and go to state 60
+
+
+State 44
+
+   25 factor: PLUS factor •
+
+    $default  reduce using rule 25 (factor)
+
+
+State 45
+
+   26 factor: MINUS factor •
+
+    $default  reduce using rule 26 (factor)
+
+
+State 46
+
+   31 print: PRINT OPEN_PAR relexpression CLOSE_PAR •
+
+    $default  reduce using rule 31 (print)
+
+
+State 47
+
+   10 relexpression: expression EQUAL_TO •
+
+    $default  reduce using rule 10 (relexpression)
+
+
+State 48
+
+   11 relexpression: expression MINOR •
+
+    $default  reduce using rule 11 (relexpression)
+
+
+State 49
+
+   12 relexpression: expression GREATER •
+
+    $default  reduce using rule 12 (relexpression)
+
+
+State 50
+
+   16 expression: term OR •
+
+    $default  reduce using rule 16 (expression)
+
+
+State 51
+
+   14 expression: term PLUS •
+
+    $default  reduce using rule 14 (expression)
+
+
+State 52
+
+   15 expression: term MINUS •
+
+    $default  reduce using rule 15 (expression)
+
+
+State 53
+
+   21 term: factor AND •
+
+    $default  reduce using rule 21 (term)
+
+
+State 54
+
+   19 term: factor MULT •
+
+    $default  reduce using rule 19 (term)
+
+
+State 55
+
+   20 term: factor DIV •
+
+    $default  reduce using rule 20 (term)
+
+
+State 56
+
+   33 while: WHILE OPEN_PAR relexpression CLOSE_PAR • statement
+
+    OPEN_BRACKET  shift, and go to state 1
+    PRINT         shift, and go to state 5
+    WHILE         shift, and go to state 6
+    IF            shift, and go to state 7
+    VAR_TYPE      shift, and go to state 8
+    COMA          shift, and go to state 9
+
+    block      go to state 10
+    statement  go to state 61
+    assigment  go to state 12
+    print      go to state 13
+    if         go to state 14
+    while      go to state 15
+    var_type   go to state 16
+
+
+State 57
+
+   32 if: IF OPEN_PAR relexpression CLOSE_PAR • statement else
+
+    OPEN_BRACKET  shift, and go to state 1
+    PRINT         shift, and go to state 5
+    WHILE         shift, and go to state 6
+    IF            shift, and go to state 7
+    VAR_TYPE      shift, and go to state 8
+    COMA          shift, and go to state 9
+
+    block      go to state 10
+    statement  go to state 62
+    assigment  go to state 12
+    print      go to state 13
+    if         go to state 14
+    while      go to state 15
+    var_type   go to state 16
+
+
+State 58
+
+   30 assigment: var_type IDEN EQUAL relexpression •
+
+    $default  reduce using rule 30 (assigment)
+
+
+State 59
+
+   29 factor: OPEN_PAR relexpression CLOSE_PAR •
+
+    $default  reduce using rule 29 (factor)
+
+
+State 60
+
+   28 factor: SCANF OPEN_PAR CLOSE_PAR •
+
+    $default  reduce using rule 28 (factor)
+
+
+State 61
+
+   33 while: WHILE OPEN_PAR relexpression CLOSE_PAR statement •
+
+    $default  reduce using rule 33 (while)
+
+
+State 62
+
+   32 if: IF OPEN_PAR relexpression CLOSE_PAR statement • else
+
+    ELSE  shift, and go to state 63
+
+    else  go to state 64
+
+
+State 63
+
+   34 else: ELSE • statement
+
+    OPEN_BRACKET  shift, and go to state 1
+    PRINT         shift, and go to state 5
+    WHILE         shift, and go to state 6
+    IF            shift, and go to state 7
+    VAR_TYPE      shift, and go to state 8
+    COMA          shift, and go to state 9
+
+    block      go to state 10
+    statement  go to state 65
+    assigment  go to state 12
+    print      go to state 13
+    if         go to state 14
+    while      go to state 15
+    var_type   go to state 16
+
+
+State 64
+
+   32 if: IF OPEN_PAR relexpression CLOSE_PAR statement else •
+
+    $default  reduce using rule 32 (if)
+
+
+State 65
+
+   34 else: ELSE statement •
+
+    $default  reduce using rule 34 (else)
