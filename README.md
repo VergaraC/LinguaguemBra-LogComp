@@ -10,27 +10,40 @@ gcc -o pyrthon parser.tab.c lex.yy.c -lfl
 
 ## EBNF da Linguagem 
 
+DECLARATION = ("int" | "palavra" | "sem_retorno"), IDENTIFIER, "(", { ("int" | "palavra"), IDENTIFIER, { "," | ("int" | "palavra"), IDENTIFIER} }, ")", BLOCK;
 
-PROGRAM = {FUNCIONDECLARATOR} ;
-RETURN = "retorna" , RELEXPRESSION ;
-PROGRAM = {FUNCIONDECLARATOR} ;
-FUNCTIONDECLARATOR = (λ | FTYPE, "(", ( (FTYPE , {"," , FTYPE } ) | λ ) , ")", STATEMENT);
-FUNCTIONCALL = IDENTIFIER, "(", { IDENTIFIER } , {"," , IDENTIFIER } , ")" ;
-FTYPE = ( "int" | "palavra" ) , IDENTIFIER ; 
-DECLARATOR = ( "int" | "palavra" ) , IDENTIFIER , { "," , IDENTIFIER } ; 
-BLOCK = "{" , { STATEMENT }, "}" ;
-STATEMENT = ( λ | ASSIGNMENT | PRINT | BLOCK | WHILE | IF | DECLARATOR), ";" ;
-FACTOR = INT | STRING | IDENTIFIER | FUNCTIONCALL | (("+" | "-" | "inverte") , FACTOR) | "(" , RELEXPRESSION , ")" | SCANF;
-TERM = FACTOR, { ("*" | "/" | "eee"), FACTOR } ;
-EXPRESSION = TERM, { ("+" | "-" | "ouu" ), TERM } ;
-RELEXPRESSION = EXPRESSION , {("menor_que" | "maior_que" | "igual") , EXPRESSION } ;
+BLOCK = ("{", STATEMENT, "}" | "{", "}");
+
+STATEMENT =  (((λ | ASSIGNMENT | PRINT  | VAR_TYPE | RETURN), ";") | (BLOCK | IF | WHILE));
+
+FACTOR = INT | STRING | (IDENTIFIER, { "(", { RELEXPRESSION, { "," | RELEXPRESSION } } ")" }) | (("+" | "-" | "inverte" FACTOR) | "(", RELEXPRESSION, ")" | SCANF;
+
+TERM = FACTOR, { ("*" | "/" | "eee"), FACTOR };
+
+EXPRESSION = TERM, { ("+" | "-" | "ouu"), TERM } ;
+
+RELEXPRESSION = EXPRESSION , {("menor_que" | "maior_que" | igual_a , EXPRESSION } ;
+
 WHILE = "enquanto", "(", RELEXPRESSION ,")", STATEMENT;
-IF = "see", "(", RELEXPRESSION ,")", STATEMENT, (("se_nao", STATEMENT) | λ );
-ASSIGNMENT = IDENTIFIER, "=" , EXPRESSION ;
-PRINT = "escreve", "(" , EXPRESSION, ")" ;
-SCANF = "lee", "(", ")" ;
-IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
-INT = DIGIT , { DIGIT } ;
+
+IF = "se", "(", RELEXPRESSION ,")", STATEMENT, (("se_nao", STATEMENT) | λ );
+
+ASSIGNMENT = (IDENTIFIER, "=", RELEXPRESSION) | ( "(", { RELEXPRESSION, { "," | RELEXPRESSION } }, ")" );
+
+RETURN = "retorna" , "(", RELEXPRESSION, ")";
+
+PRINT = "escreve", "(", RELEXPRESSION, ")";
+
+SCANF = "lee", "(", ")";
+
+IDENTIFIER = LETTER, { LETTER | DIGIT | "_" };
+
+DIGIT = (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9);
+
+INT = DIGIT, { DIGIT };
+
+VAR_TYPE = ("int" | "palavra") , IDENTIFIER , (λ | {"," , IDENTIFIER });
+
+STRING = """, (LETTER | DIGIT), """;
+
 LETTER = ( a | ... | z | A | ... | Z ) ;
-STRING = '"', { LETTER | DIGIT }, '"' ;
-DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;

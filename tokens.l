@@ -22,6 +22,7 @@
 "}"                     return CLOSE_BRACKET;
 ","                     return COMA;
 "+"                     return PLUS;
+"junta_palavras"                     return CONCAT;
 "-"                     return MINUS;
 "*"                     return MULT;
 "/"                     return DIV;
@@ -36,6 +37,7 @@
 "se_nao"                return ELSE;
 "int"                   return VAR_TYPE;
 "palavra"               return VAR_TYPE;
+"sem_retorno"               return VAR_TYPE;
 "retorna"                return RETURN;
 .                       printf("Unknown token!n"); yyterminate();
 
