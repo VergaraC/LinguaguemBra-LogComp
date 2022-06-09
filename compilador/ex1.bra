@@ -1,0 +1,13 @@
+sem_retorno main(){
+	int a;
+	int b;
+	a = 4;
+	b = 6;
+	
+	
+	enquanto (a menor_que b){
+		escreve(a);
+	
+		a = a + 1;
+	}
+}
